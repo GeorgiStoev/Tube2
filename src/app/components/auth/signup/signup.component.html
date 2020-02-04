@@ -1,0 +1,61 @@
+<h3 class="text-center text-primary pt-5">Sign Up</h3>
+<hr class="w-50 hr-2" />
+<form #form="ngForm" (submit)="signUp(form)" class="mx-auto w-50" method="">
+    <div class="form-group">
+        <label for="firstName" class="text-info">First Name:</label>
+        <input name="firstName" type="text" class="form-control" id="firstName" placeholder="FirstName..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.firstName?.touched && form.controls.firstName?.errors?.required">
+        FirstName is required!
+    </div>
+    <div class="form-group">
+        <label for="lastName" class="text-info">Last Name:</label>
+        <input name="lastName" type="text" class="form-control" id="lastName" placeholder="lastName..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.lastName?.touched && form.controls.lastName?.errors?.required">
+        LastName is required!
+    </div>
+    <div ngModelGroup="passwords">
+        <div class="form-group">
+            <label for="password" class="text-info">Password</label>
+            <input name="password" pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$" type="password" class="form-control" id="password" placeholder="Password..." required ngModel>
+        </div>
+        <div class="alert alert-danger text-center" *ngIf="form?.controls.passwords?.controls.password.touched && form.controls.passwords?.controls.password.errors?.required">
+            Password is required!
+        </div>
+        <div class="alert alert-danger text-center" *ngIf="form.controls.passwords?.controls.password.errors?.pattern">
+            Password should be at least 8 characters long and should contain one number,one character and one special character.
+        </div>
+        <div class="form-group">
+            <label for="rePassword" class="text-info">Confirm Password</label>
+            <input name="confPassword" type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password..." required ngModel>
+        </div>
+        <div class="alert alert-danger text-center" *ngIf="form?.controls.passwords?.controls.confPassword.touched && form.controls.passwords?.controls.confPassword.errors?.required">
+            ConfPassword is required!
+        </div>
+        <div class="alert alert-danger text-center" *ngIf="form?.controls.passwords?.controls.confPassword.touched && form.controls.passwords?.controls.password?.value != form.controls.passwords?.controls.confPassword?.value">
+            Passwords do not match!
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="text-info">Email</label>
+        <input name="email" pattern="[^@]+@[^\.]+\..+" type="email" class="form-control" id="email" placeholder="Email..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.email?.touched && form.controls.email?.errors?.required">
+        Email is required!
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.email?.touched && form.controls.email?.errors?.pattern">
+        Email is Invalid!
+    </div>
+    <div class="form-group">
+        <label for="imageUrl" class="text-info">image Url</label>
+        <input name="imageUrl" type="imageUrl" class="form-control" id="imageUrl" placeholder="imageUrl..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.imageUrl?.touched && form.controls.imageUrl?.errors?.required">
+        Image Url is required!
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-info btn-md align-items-md text-white" [disabled]="form.invalid">Sign Up</button>
+    </div>
+    <p>Already Registered? <a routerLink="/signin">SignIn</a>.</p>
+</form>

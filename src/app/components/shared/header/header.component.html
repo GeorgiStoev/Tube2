@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="/">Tube2</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ng-template [ngIf]="!isAuth">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/signin">Sign In</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" routerLink="/signup">Sign Up</a>
+          </li>
+      </ul>
+      </ng-template>
+      <ng-template [ngIf]="isAuth">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+              <a class="nav-link" routerLink="">Profile</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" (click)="logout()" routerLink="">Logout</a>
+          </li>
+      </ul>
+      </ng-template>
+    </div>
+  </nav>
+
