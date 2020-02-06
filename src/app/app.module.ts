@@ -38,6 +38,7 @@ import { VideoCreateComponent } from './components/videos/video-create/video-cre
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
+    ToastrModule.forRoot({timeOut: 3000, preventDuplicates: true}),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,

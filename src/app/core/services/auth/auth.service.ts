@@ -4,6 +4,8 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { User } from '../../../models/user';
+import { ToastrService } from 'ngx-toastr';
+import { ToastrConfig } from '../../../models/toatsr.config';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +17,8 @@ export class AuthService {
   constructor(
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) {}
 
   initializeAuthState() {
@@ -35,11 +38,12 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then((data) => {
         this.pushUserData({ email, firstName, lastName, imageUrl });
+        this.toastr.success("Successfully registered!", "Success", ToastrConfig);
         this.router.navigate([ '/' ]);
         console.log(data);
       })
       .catch((err) => {
-        console.log(err);
+        this.toastr.error(err, "Error", ToastrConfig);
       });
   }
 
@@ -47,17 +51,23 @@ export class AuthService {
     this.dbAuth.auth
         .signInWithEmailAndPassword(email, password)
         .then((data) => {
+          this.toastr.success("Successfully logged in!", "Success", ToastrConfig);
           this.router.navigate([ '/' ]);
-          console.log(data);
         })
         .catch((err) => {
-          console.log(err);
+          this.toastr.error(err, "Error", ToastrConfig);
         });
   }
 
   signOut() {
-    this.dbAuth.auth.signOut();
-    this.router.navigate([ '/signin' ]);
+    this.dbAuth.auth.signOut()
+    .then(() => {
+      this.toastr.success("Successfully logged out!", "Success", ToastrConfig);
+      this.router.navigate([ '/signin' ]);
+    })
+    .catch(err => {
+      this.toastr.error(err, "Error", ToastrConfig);
+    });
   }
 
   getToken() {
