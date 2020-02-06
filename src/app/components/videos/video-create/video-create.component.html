@@ -1,0 +1,34 @@
+<h3 class="text-center text-primary pt-5">Add Video</h3>
+<hr class="w-50 hr-2" />
+<form #form="ngForm" (submit)="addVideo(form)" class="mx-auto w-50" method="">
+    <div class="form-group">
+        <label for="name" class="text-info">Name</label>
+        <input name="name" type="name" class="form-control" id="name" placeholder="Name..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.name?.touched && form.controls.name?.errors?.required">
+        Name is required!
+    </div>
+    <div class="form-group">
+        <label for="category" class="text-info">Category:</label>
+        <select name="category" class="form-control text-primary" id="category" for="Category" required ngModel>
+            <option selected disabled>--- Select Video Category ---</option>
+            <option>Music</option>
+            <option>News</option>
+            <option>Sport</option>
+            <option>TV</option>
+        </select>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.category?.touched && form.controls.category?.errors?.required">
+        Category
+    </div>
+    <div class="form-group">
+        <label for="videoUrl" class="text-info">Video Url</label>
+        <input name="videoUrl" type="name" class="form-control" id="videoUrl" placeholder="Video Url..." required ngModel>
+    </div>
+    <div class="alert alert-danger text-center" *ngIf="form.controls.videoUrl?.touched && form.controls.videoUrl?.errors?.required">
+        Video Url is required!
+    </div>
+    <div class="button-holder d-flex justify-content-center">
+        <button type="submit" class="btn btn-info btn-md align-items-md text-white" [disabled]="form.invalid">Add</button>
+    </div>
+</form>

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs';
+import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { User } from '../models/user';
 
 @Injectable()
 export class AuthService {
@@ -11,7 +13,9 @@ export class AuthService {
   isAuthChanged = new Subject<boolean>();
 
   constructor(
-    private dbAuth: AngularFireAuth
+    private dbAuth: AngularFireAuth,
+    private afDb: AngularFirestore,
+    private router: Router
   ) {}
 
   initializeAuthState() {
@@ -26,10 +30,12 @@ export class AuthService {
    });
   }
 
-  signup(email: string, password: string) {
+  signup(email: string, firstName:string, lastName: string, imageUrl: string, password: string) {
    this.dbAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then((data) => {
+        this.pushUserData({ email, firstName, lastName, imageUrl });
+        this.router.navigate([ '/' ]);
         console.log(data);
       })
       .catch((err) => {
@@ -41,6 +47,7 @@ export class AuthService {
     this.dbAuth.auth
         .signInWithEmailAndPassword(email, password)
         .then((data) => {
+          this.router.navigate([ '/' ]);
           console.log(data);
         })
         .catch((err) => {
@@ -50,5 +57,27 @@ export class AuthService {
 
   signOut() {
     this.dbAuth.auth.signOut();
+    this.router.navigate([ '/signin' ]);
+  }
+
+  getToken() {
+    let token = localStorage.getItem('token');
+    return token;
+  }
+
+  private pushUserData(user) {
+    user.uid = this.getUserId();
+
+    return this.afDb.collection<User>('users').add({
+      uid: user.uid,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      imageUrl: user.imageUrl
+    });
+  }
+
+  getUserId() {
+    return this.dbAuth.auth.currentUser ? this.dbAuth.auth.currentUser.uid : "";
   }
 }
