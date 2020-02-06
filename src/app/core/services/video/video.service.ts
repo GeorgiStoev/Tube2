@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Video } from '../models/video';
+import { Video } from '../../../models/video';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
+import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from '@angular/router';
 
 @Injectable({

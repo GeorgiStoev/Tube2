@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VideoService } from 'src/app/services/video.service';
-import { Router } from '@angular/router';
-import { from } from 'rxjs';
-import { AuthService } from '../../../services/auth.service';
+import { VideoService } from '../../../core/services/video/video.service';
+import { AuthService } from '../../../core/services//auth/auth.service';
 
 @Component({
   selector: 'app-video-create',
@@ -13,8 +11,7 @@ export class VideoCreateComponent implements OnInit {
 
   constructor(
     private videoService: VideoService,
-    private authService: AuthService,
-    private router: Router
+    private authService: AuthService
   ) { }
 
   ngOnInit() {

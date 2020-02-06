@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../services/auth.service';
+import { AuthService } from '../../../core/services/auth/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -22,7 +22,6 @@ export class SignupComponent implements OnInit {
     const lastName = formData.value.lastName;
     const imageUrl = formData.value.imageUrl;
     const password = formData.value.passwords.password;
-    
     
     this.authService.signup(email, firstName, lastName, imageUrl, password);
   }

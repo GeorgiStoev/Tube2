@@ -13,15 +13,15 @@ import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
 import { LandingComponent } from './components/shared/landing/landing.component';
 import { HomeComponent } from './components/home/home.component';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
 import { ToastrModule } from 'ngx-toastr';
-import { JwtInterceptorService } from './services/jwt-interceptor.service';
+import { VideoService } from './core/services/video/video.service';
+import { AuthService } from './core/services/auth/auth.service';
+import { JwtInterceptorService } from './core/services/interceptors/jwt-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
-import { VideoService } from './services/video.service';
 
 @NgModule({
   declarations: [

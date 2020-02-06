@@ -3,7 +3,7 @@ import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Subject } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
-import { User } from '../models/user';
+import { User } from '../../../models/user';
 
 @Injectable()
 export class AuthService {
