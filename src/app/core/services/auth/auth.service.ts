@@ -8,7 +8,7 @@ import { User } from '../../../models/user';
 @Injectable()
 export class AuthService {
 
-  private isAuth: boolean;
+  private _isAuth: boolean;
 
   isAuthChanged = new Subject<boolean>();
 
@@ -21,10 +21,10 @@ export class AuthService {
   initializeAuthState() {
    this.dbAuth.authState.subscribe((userData) => {
     if (userData) {
-      this.isAuth = true;
+      this._isAuth = true;
       this.isAuthChanged.next(true);
     } else {
-      this.isAuth = false;
+      this._isAuth = false;
       this.isAuthChanged.next(false);
     }
    });
@@ -79,5 +79,9 @@ export class AuthService {
 
   getUserId() {
     return this.dbAuth.auth.currentUser ? this.dbAuth.auth.currentUser.uid : "";
+  }
+
+  isAuth(): boolean {
+    return this._isAuth;
   }
 }
