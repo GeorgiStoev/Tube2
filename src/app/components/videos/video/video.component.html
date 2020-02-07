@@ -1,0 +1,13 @@
+<div class="card">
+<iframe [class.thumbnail]="thumbnail" [src]='videoUrl' width="253" height="253" frameborder="0" webkitallowfullscreen mozallowfullscreen
+    allowfullscreen></iframe>
+<div class="card-body">
+    <h5 class="card-title">{{video.name}}</h5>
+    <ng-template [ngIf]="!isAuth">
+        <button type="button" class="btn btn-outline-danger" routerLink="/signin">play</button>
+    </ng-template>
+    <ng-template [ngIf]="isAuth">
+        <button type="button" class="btn btn-outline-danger" routerLink="/">play</button>
+    </ng-template>
+</div>
+</div>

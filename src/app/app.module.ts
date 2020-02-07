@@ -22,6 +22,8 @@ import { AuthService } from './core/services/auth/auth.service';
 import { JwtInterceptorService } from './core/services/interceptors/jwt-interceptor.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
+import { VideoListComponent } from './components/videos/video-list/video-list.component';
+import { VideoComponent } from './components/videos/video/video.component';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,15 @@ import { VideoCreateComponent } from './components/videos/video-create/video-cre
     SignupComponent,
     LandingComponent,
     HomeComponent,
-    VideoCreateComponent
+    VideoCreateComponent,
+    VideoListComponent,
+    VideoComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ToastrModule.forRoot({timeOut: 3000, preventDuplicates: true}),
+    ToastrModule.forRoot({timeOut: 2500, preventDuplicates: true}),
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -52,4 +56,5 @@ import { VideoCreateComponent } from './components/videos/video-create/video-cre
     {  provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

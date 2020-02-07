@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Video } from '../../../models/video';
-import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from '@angular/router';
+import { ToastrConfig } from '../../../models/toatsr.config';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,22 @@ import { Router } from '@angular/router';
 export class VideoService {
 
   constructor(
-    private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private toastr: ToastrService
   ) { }
+
+  listNews() {
+    return this.afDb.collection('videos', ref => ref.where('category', '==', 'News')).snapshotChanges();
+  }
+
+  listMusic() {
+    return this.afDb.collection('videos', ref => ref.where('category', '==', 'Music')).snapshotChanges();
+  }
+
+  listSport() {
+    return this.afDb.collection('videos', ref => ref.where('category', '==', 'Sport')).snapshotChanges();
+  }
 
   createVideo(name: string, category: string, videoUrl: string, uploaderId: string, date: Date) {
     this.afDb.collection<Video>('videos').add({
@@ -24,10 +37,11 @@ export class VideoService {
       date: date 
     })
     .then((data) => {
-      this.router.navigate([ '/' ])
+      this.toastr.success("Successfully Upload Video!", "Success", ToastrConfig);
+      this.router.navigate([ '/' ]);
     })
     .catch((err) => {
-      console.log(err);
+      this.toastr.error(err, "Error", ToastrConfig);
     });
   }
 }

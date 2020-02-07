@@ -6,11 +6,12 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 import { User } from '../../../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrConfig } from '../../../models/toatsr.config';
+import { VideoService } from '../video/video.service';
 
 @Injectable()
 export class AuthService {
 
-  private _isAuth: boolean;
+  public _isAuth: boolean;
 
   isAuthChanged = new Subject<boolean>();
 
@@ -18,7 +19,8 @@ export class AuthService {
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private videoService: VideoService
   ) {}
 
   initializeAuthState() {
@@ -40,7 +42,6 @@ export class AuthService {
         this.pushUserData({ email, firstName, lastName, imageUrl });
         this.toastr.success("Successfully registered!", "Success", ToastrConfig);
         this.router.navigate([ '/' ]);
-        console.log(data);
       })
       .catch((err) => {
         this.toastr.error(err, "Error", ToastrConfig);
@@ -53,6 +54,7 @@ export class AuthService {
         .then((data) => {
           this.toastr.success("Successfully logged in!", "Success", ToastrConfig);
           this.router.navigate([ '/' ]);
+          console.log(this.videoService.listVideos());
         })
         .catch((err) => {
           this.toastr.error(err, "Error", ToastrConfig);
