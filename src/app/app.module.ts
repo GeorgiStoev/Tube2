@@ -24,6 +24,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
 import { VideoListComponent } from './components/videos/video-list/video-list.component';
 import { VideoComponent } from './components/videos/video/video.component';
+import { VideoWatchComponent } from './components/videos/video-watch/video-watch.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { VideoComponent } from './components/videos/video/video.component';
     HomeComponent,
     VideoCreateComponent,
     VideoListComponent,
-    VideoComponent
+    VideoComponent,
+    VideoWatchComponent
   ],
   imports: [
     BrowserModule,

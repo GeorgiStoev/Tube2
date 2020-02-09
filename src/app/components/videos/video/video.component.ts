@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Video } from '../../../models/video';
-import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../../../core/services/auth/auth.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video',
@@ -25,7 +25,8 @@ export class VideoComponent implements OnInit {
     this.videoUrl = this.transform(this.video.videoUrl);
   }
 
-  transform(url: string) {
+  
+  transform(url: any) {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url.replace('watch?v=', 'embed/'));
   }
 }

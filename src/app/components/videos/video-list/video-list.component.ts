@@ -24,6 +24,7 @@ export class VideoListComponent implements OnInit {
     this.getNews();
     this.getMusic();
     this.getSport();
+
   }
 
   getNews() {

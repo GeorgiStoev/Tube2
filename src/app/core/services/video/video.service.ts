@@ -28,7 +28,12 @@ export class VideoService {
     return this.afDb.collection('videos', ref => ref.where('category', '==', 'Sport')).snapshotChanges();
   }
 
+  getVideoById(id) {
+    return this.afDb.collection('videos').doc(id).valueChanges();
+  }
+
   createVideo(name: string, category: string, videoUrl: string, uploaderId: string, date: Date) {
+    
     this.afDb.collection<Video>('videos').add({
       name: name,
       category: category,

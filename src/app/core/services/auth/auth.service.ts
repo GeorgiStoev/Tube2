@@ -54,7 +54,6 @@ export class AuthService {
         .then((data) => {
           this.toastr.success("Successfully logged in!", "Success", ToastrConfig);
           this.router.navigate([ '/' ]);
-          console.log(this.videoService.listVideos());
         })
         .catch((err) => {
           this.toastr.error(err, "Error", ToastrConfig);

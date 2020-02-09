@@ -6,6 +6,7 @@ import { SignupComponent } from './components/auth/signup/signup.component';
 import { HomeComponent } from './components/home/home.component';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
+import { VideoWatchComponent } from './components/videos/video-watch/video-watch.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -13,11 +14,12 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { 
     path: 'video', children: [
-      { path: 'create', component: VideoCreateComponent }
-    ], canActivate: [AuthGuard]
+      { path: 'create', component: VideoCreateComponent },
+      { path: 'watch/:id', component: VideoWatchComponent }
+    ], canActivate: [AuthGuard],
+    
   }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

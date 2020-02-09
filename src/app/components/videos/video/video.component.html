@@ -7,7 +7,7 @@
         <button type="button" class="btn btn-outline-danger" routerLink="/signin">play</button>
     </ng-template>
     <ng-template [ngIf]="isAuth">
-        <button type="button" class="btn btn-outline-danger" routerLink="/">play</button>
+        <button type="button" class="btn btn-outline-danger" [routerLink]="['/video/watch', video.id]">play</button>
     </ng-template>
 </div>
 </div>
