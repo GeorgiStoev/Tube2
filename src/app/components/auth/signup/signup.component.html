@@ -49,7 +49,7 @@
     </div>
     <div class="form-group">
         <label for="imageUrl" class="text-info">image Url</label>
-        <input name="imageUrl" type="imageUrl" class="form-control" id="imageUrl" placeholder="imageUrl..." required ngModel>
+        <input name="imageUrl" type="text" class="form-control" id="imageUrl" placeholder="imageUrl..." required ngModel>
     </div>
     <div class="alert alert-danger text-center" *ngIf="form.controls.imageUrl?.touched && form.controls.imageUrl?.errors?.required">
         Image Url is required!

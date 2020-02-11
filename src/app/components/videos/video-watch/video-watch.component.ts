@@ -13,11 +13,12 @@ export class VideoWatchComponent implements OnInit {
 
   video: any;
   videoUrl: any;
+  isMy: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private videoService: VideoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) { }
 
   ngOnInit() {
@@ -34,6 +35,7 @@ export class VideoWatchComponent implements OnInit {
       .subscribe((video) => {
         this.video = video,
         this.videoUrl = this.transform(this.video.videoUrl);
+        this.isMy = this.videoService.isMy(this.video.uploaderId);
       });
     });
   }

@@ -4,6 +4,8 @@ import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from '@angular/router';
 import { ToastrConfig } from '../../../models/toatsr.config';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth/auth.service';
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +15,25 @@ export class VideoService {
   constructor(
     private afDb: AngularFirestore,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) { }
 
+  listByCategory(category: string) {
+    const data =  this.afDb.collection<Video>('videos', ref => ref.where('category', '==', category));
+    return data.snapshotChanges().pipe(
+      map(actions => actions.map(
+        a => {
+          const data = a.payload.doc.data() as Video;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }
+      ))
+    );
+  }
+
   listNews() {
-    return this.afDb.collection('videos', ref => ref.where('category', '==', 'News')).snapshotChanges();
+    
   }
 
   listMusic() {
@@ -48,5 +64,15 @@ export class VideoService {
     .catch((err) => {
       this.toastr.error(err, "Error", ToastrConfig);
     });
+  }
+
+  isMy(uploaderId: string) {
+    let currentUserId = this.authService.getUserId();
+    
+    if (uploaderId === currentUserId) {
+      return true;
+    }
+
+    return false;
   }
 }

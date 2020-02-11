@@ -6,7 +6,6 @@ import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firest
 import { User } from '../../../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrConfig } from '../../../models/toatsr.config';
-import { VideoService } from '../video/video.service';
 
 @Injectable()
 export class AuthService {
@@ -19,8 +18,7 @@ export class AuthService {
     private dbAuth: AngularFireAuth,
     private afDb: AngularFirestore,
     private router: Router,
-    private toastr: ToastrService,
-    private videoService: VideoService
+    private toastr: ToastrService
   ) {}
 
   initializeAuthState() {
@@ -78,21 +76,24 @@ export class AuthService {
 
   private pushUserData(user) {
     user.uid = this.getUserId();
-
+      
     return this.afDb.collection<User>('users').add({
       uid: user.uid,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      imageUrl: user.imageUrl
+      imageUrl: user.imageUrl,
+      favourites: Array<string>()
     });
   }
 
   getUserId() {
-    return this.dbAuth.auth.currentUser ? this.dbAuth.auth.currentUser.uid : "";
+    return this.dbAuth.auth.currentUser.uid;
   }
 
   isAuth(): boolean {
     return this._isAuth;
   }
 }
+
+// this.dbAuth.auth.currentUser ? : ""

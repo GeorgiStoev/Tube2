@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from '../../../core/services/video/video.service';
 import { Video } from '../../../models/video';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-video-list',
@@ -15,51 +14,33 @@ export class VideoListComponent implements OnInit {
   sport: Video[];
 
   constructor(
-    private videoService: VideoService,
-    public sanitizer: DomSanitizer
+    private videoService: VideoService
   ) { }
 
   ngOnInit() {
-
-    this.getNews();
-    this.getMusic();
-    this.getSport();
-
+    this.loadNews();
+    this.loadMusic();
+    this.loadSport();
   }
 
-  getNews() {
-    this.videoService.listNews()
-      .subscribe(actionArray => {
-        this.news = actionArray.map(item => {
-          return {
-            id: item.payload.doc.id,
-            ...item.payload.doc.data()
-          } as Video
-        })
+  loadNews() {
+    this.videoService.listByCategory('News')
+      .subscribe((data) => {
+        this.news = data;
       });
   }
 
-  getMusic() {
-    this.videoService.listMusic()
-      .subscribe(actionArray => {
-        this.music = actionArray.map(item => {
-          return {
-            id: item.payload.doc.id,
-            ...item.payload.doc.data()
-          } as Video
-        })
+  loadMusic() {
+    this.videoService.listByCategory('Music')
+      .subscribe((data) => {
+        this.music = data;
       });
   }
 
-  getSport() {
-    this.videoService.listSport()
-      .subscribe(actionArray => {
-        this.sport = actionArray.map(item => {
-          return {
-            id: item.payload.doc.id,
-            ...item.payload.doc.data()
-          } as Video
-        })
+  loadSport() {
+    this.videoService.listByCategory('Sport')
+      .subscribe((data) => {
+        this.sport = data;
       });
   }
 }
