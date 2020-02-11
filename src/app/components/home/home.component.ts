@@ -8,14 +8,7 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  // name: string;
-  // constructor() { }
-
-  // ngOnInit() {
-  //   this.name = localStorage.getItem('name');
-  // }
-
-   
+  
   isAuth: boolean = false;
   isAuthSub: Subscription;
   constructor(

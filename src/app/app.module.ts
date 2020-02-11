@@ -25,6 +25,7 @@ import { VideoCreateComponent } from './components/videos/video-create/video-cre
 import { VideoListComponent } from './components/videos/video-list/video-list.component';
 import { VideoComponent } from './components/videos/video/video.component';
 import { VideoWatchComponent } from './components/videos/video-watch/video-watch.component';
+import { VideoFavouritesComponent } from './components/videos/video-favourites/video-favourites.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { VideoWatchComponent } from './components/videos/video-watch/video-watch
     VideoCreateComponent,
     VideoListComponent,
     VideoComponent,
-    VideoWatchComponent
+    VideoWatchComponent,
+    VideoFavouritesComponent
   ],
   imports: [
     BrowserModule,

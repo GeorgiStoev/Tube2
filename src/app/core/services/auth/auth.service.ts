@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { AngularFireAuth } from 'angularfire2/auth';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from "@angular/fire/firestore";
 import { User } from '../../../models/user';
 import { ToastrService } from 'ngx-toastr';
 import { ToastrConfig } from '../../../models/toatsr.config';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
@@ -37,7 +38,7 @@ export class AuthService {
    this.dbAuth.auth
       .createUserWithEmailAndPassword(email, password)
       .then((data) => {
-        this.pushUserData({ email, firstName, lastName, imageUrl });
+        this.pushUserData(email, firstName, lastName, imageUrl);
         this.toastr.success("Successfully registered!", "Success", ToastrConfig);
         this.router.navigate([ '/' ]);
       })
@@ -74,15 +75,15 @@ export class AuthService {
     return token;
   }
 
-  private pushUserData(user) {
-    user.uid = this.getUserId();
+  private pushUserData(email: string, firstName: string, lastName: string, imageUrl: string) {
+    const uid = this.getUserId();
       
     return this.afDb.collection<User>('users').add({
-      uid: user.uid,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      imageUrl: user.imageUrl,
+      uid: uid,
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      imageUrl: imageUrl,
       favourites: Array<string>()
     });
   }
@@ -93,6 +94,30 @@ export class AuthService {
 
   isAuth(): boolean {
     return this._isAuth;
+  }
+
+  updateUser(user: any) {
+    return this.afDb.collection('users').doc(user.id).set(user)
+    .then(() => {
+      this.toastr.success("Successfully added to favourites!", "Success", ToastrConfig);
+      //this.router.navigate([ '/signin' ]);
+    })
+    .catch(err => {
+      this.toastr.error(err, "Error", ToastrConfig);
+    });;
+  }
+
+  getUser(id: string) {
+    const data =  this.afDb.collection<User>('users', ref => ref.where('uid', '==', id));
+    return data.snapshotChanges().pipe(
+      map(actions => actions.map(
+        a => {
+          const data = a.payload.doc.data() as User;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }
+      ))
+    );
   }
 }
 

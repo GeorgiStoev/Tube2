@@ -32,19 +32,7 @@ export class VideoService {
     );
   }
 
-  listNews() {
-    
-  }
-
-  listMusic() {
-    return this.afDb.collection('videos', ref => ref.where('category', '==', 'Music')).snapshotChanges();
-  }
-
-  listSport() {
-    return this.afDb.collection('videos', ref => ref.where('category', '==', 'Sport')).snapshotChanges();
-  }
-
-  getVideoById(id) {
+  getVideoById(id: string) {
     return this.afDb.collection('videos').doc(id).valueChanges();
   }
 

@@ -7,6 +7,7 @@ import { HomeComponent } from './components/home/home.component';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { VideoWatchComponent } from './components/videos/video-watch/video-watch.component';
+import { VideoFavouritesComponent } from './components/videos/video-favourites/video-favourites.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   { 
     path: 'video', children: [
       { path: 'create', component: VideoCreateComponent },
-      { path: 'watch/:id', component: VideoWatchComponent }
+      { path: 'watch/:id', component: VideoWatchComponent },
+      { path: 'favourites', component: VideoFavouritesComponent }
     ], canActivate: [AuthGuard],
     
   }
