@@ -11,7 +11,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class VideoComponent implements OnInit {
 
   @Input('video')
-  video: Video;
+  video: any;
   videoUrl: any;
   isAuth: boolean;
 

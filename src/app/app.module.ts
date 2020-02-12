@@ -19,13 +19,12 @@ import { FormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { VideoService } from './core/services/video/video.service';
 import { AuthService } from './core/services/auth/auth.service';
-import { JwtInterceptorService } from './core/services/interceptors/jwt-interceptor.service';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VideoCreateComponent } from './components/videos/video-create/video-create.component';
 import { VideoListComponent } from './components/videos/video-list/video-list.component';
 import { VideoComponent } from './components/videos/video/video.component';
 import { VideoWatchComponent } from './components/videos/video-watch/video-watch.component';
 import { VideoFavouritesComponent } from './components/videos/video-favourites/video-favourites.component';
+import { AuthGuard } from './core/guards/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +56,8 @@ import { VideoFavouritesComponent } from './components/videos/video-favourites/v
   providers: [
     AuthService,
     VideoService,
-    {  provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true }],
+    AuthGuard
+    ],
   bootstrap: [AppComponent]
 })
 

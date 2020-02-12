@@ -43,7 +43,7 @@ export class VideoWatchComponent implements OnInit {
     });
   }
 
-  AddToFavourites() {
+  addToFavourites() {
     this.route.params.subscribe((data) => {
       let id = data['id'];
       this.authService.getUser(this.authService.getUserId()).subscribe((data) => {
@@ -54,6 +54,13 @@ export class VideoWatchComponent implements OnInit {
           }
     });
   });
+  }
+
+  delete() {
+    this.route.params.subscribe((data) => {
+      let id = data['id'];
+      this.videoService.delete(id);
+    })
   }
 
   transform(url: any) {

@@ -1,1 +1,6 @@
-<p>video-favourites works!</p>
+<h1 class="text-center">Favourites</h1>
+<div class="row">
+  <div class="col-lg-2" *ngFor="let video of favourites">
+      <app-video [video]="video"></app-video>
+  </div>
+</div>

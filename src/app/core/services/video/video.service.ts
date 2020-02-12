@@ -33,7 +33,7 @@ export class VideoService {
   }
 
   getVideoById(id: string) {
-    return this.afDb.collection('videos').doc(id).valueChanges();
+    return this.afDb.collection<Video>('videos').doc(id).valueChanges();
   }
 
   createVideo(name: string, category: string, videoUrl: string, uploaderId: string, date: Date) {
@@ -62,5 +62,16 @@ export class VideoService {
     }
 
     return false;
+  }
+
+  delete(id: string) {
+    return this.afDb.collection('videos').doc(id).delete()
+    .then((data) => {
+      this.toastr.success("Successfully Delete Video!", "Success", ToastrConfig);
+      this.router.navigate([ '/' ]);
+    })
+    .catch((err) => {
+      this.toastr.error(err, "Error", ToastrConfig);
+    });
   }
 }

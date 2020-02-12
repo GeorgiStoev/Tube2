@@ -12,7 +12,6 @@ import { map } from 'rxjs/operators';
 export class AuthService {
 
   public _isAuth: boolean;
-
   isAuthChanged = new Subject<boolean>();
 
   constructor(
@@ -21,6 +20,10 @@ export class AuthService {
     private router: Router,
     private toastr: ToastrService
   ) {}
+
+  isAuth(): boolean {
+    return this._isAuth;
+  }
 
   initializeAuthState() {
    this.dbAuth.authState.subscribe((userData) => {
@@ -92,15 +95,11 @@ export class AuthService {
     return this.dbAuth.auth.currentUser.uid;
   }
 
-  isAuth(): boolean {
-    return this._isAuth;
-  }
-
   updateUser(user: any) {
     return this.afDb.collection('users').doc(user.id).set(user)
     .then(() => {
       this.toastr.success("Successfully added to favourites!", "Success", ToastrConfig);
-      //this.router.navigate([ '/signin' ]);
+      this.router.navigate([ '/video/favourites' ]);
     })
     .catch(err => {
       this.toastr.error(err, "Error", ToastrConfig);
@@ -120,5 +119,3 @@ export class AuthService {
     );
   }
 }
-
-// this.dbAuth.auth.currentUser ? : ""
