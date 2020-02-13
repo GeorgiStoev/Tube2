@@ -1,2 +1,18 @@
-<app-landing></app-landing>
+<div class="jumbotron">
+    <div class="page-header">
+        <div class="pull-left">
+            <ng-template [ngIf]="!userFullName">
+                <h1 class="display-3">Welcome, Guest!</h1>
+            </ng-template>
+            <ng-template [ngIf]="userFullName">
+                <h1 class="display-3">Welcome, {{userFullName}}!</h1>
+            </ng-template>
+        </div>
+        <div class="clearfix">
+            <h3 class="text-info">Want to see Tube1?
+                <a class="nav-link active" href="http://georgistoev-001-site1.htempurl.com/">Click Here</a>
+            </h3>
+        </div>
+      </div>
+  </div>
 <app-video-list></app-video-list>

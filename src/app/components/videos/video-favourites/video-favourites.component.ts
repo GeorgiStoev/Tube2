@@ -33,8 +33,10 @@ export class VideoFavouritesComponent implements OnInit {
     for (const videoId of ids) {
       this.videoService.getVideoById(videoId).subscribe(video => {
         this.video = video;
-        this.video['id'] = videoId;
-        this.favourites.push(this.video);
+        if(this.video) {
+          this.video.id = videoId;
+          this.favourites.push(this.video);
+        }
       });
     }
   }

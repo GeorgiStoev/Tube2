@@ -10,7 +10,6 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
 
   isAuth: boolean;
-
   isAuthSub: Subscription;
 
   constructor(
@@ -19,7 +18,6 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isAuthSub = this.authService.isAuthChanged.subscribe((data) => {
-      
       this.isAuth = data;
     });
   }

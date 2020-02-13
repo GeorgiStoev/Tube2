@@ -11,7 +11,6 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
 import { SigninComponent } from './components/auth/signin/signin.component';
 import { SignupComponent } from './components/auth/signup/signup.component';
-import { LandingComponent } from './components/shared/landing/landing.component';
 import { HomeComponent } from './components/home/home.component';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -33,7 +32,6 @@ import { AuthGuard } from './core/guards/auth-guard.service';
     FooterComponent,
     SigninComponent,
     SignupComponent,
-    LandingComponent,
     HomeComponent,
     VideoCreateComponent,
     VideoListComponent,
@@ -57,7 +55,7 @@ import { AuthGuard } from './core/guards/auth-guard.service';
     AuthService,
     VideoService,
     AuthGuard
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 

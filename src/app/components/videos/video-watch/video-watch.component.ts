@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VideoService } from 'src/app/core/services/video/video.service';
-import { Video } from 'src/app/models/video';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
@@ -16,6 +15,7 @@ export class VideoWatchComponent implements OnInit {
   videoUrl: any;
   isMy: boolean;
   uploaderPicUrl: string;
+  userNames: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +38,7 @@ export class VideoWatchComponent implements OnInit {
         this.isMy = this.videoService.isMy(this.video.uploaderId);
         this.authService.getUser(this.video.uploaderId).subscribe((data) => {
         this.uploaderPicUrl = data[0].imageUrl;
+        this.userNames = data[0].firstName + " " + data[0].lastName;
         })
       });
     });

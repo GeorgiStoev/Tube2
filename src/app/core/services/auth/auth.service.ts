@@ -13,6 +13,7 @@ export class AuthService {
 
   public _isAuth: boolean;
   isAuthChanged = new Subject<boolean>();
+  userFullName: string;
 
   constructor(
     private dbAuth: AngularFireAuth,
@@ -92,7 +93,7 @@ export class AuthService {
   }
 
   getUserId() {
-    return this.dbAuth.auth.currentUser.uid;
+    return this.dbAuth.auth.currentUser ? this.dbAuth.auth.currentUser.uid : "";
   }
 
   updateUser(user: any) {
