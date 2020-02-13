@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -13,7 +14,8 @@ export class HeaderComponent implements OnInit {
   isAuthSub: Subscription;
 
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -28,5 +30,10 @@ export class HeaderComponent implements OnInit {
   
   logout() {
     this.authService.signOut();
+  }
+
+  profile() {
+    let id = this.authService.getUserId();
+    this.router.navigate([ `profile/${id}` ]);
   }
 }

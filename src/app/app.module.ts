@@ -25,6 +25,7 @@ import { VideoWatchComponent } from './components/videos/video-watch/video-watch
 import { VideoFavouritesComponent } from './components/videos/video-favourites/video-favourites.component';
 import { AuthGuard } from './core/guards/auth-guard.service';
 import { VideoEditComponent } from './components/videos/video-edit/video-edit.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { VideoEditComponent } from './components/videos/video-edit/video-edit.co
     VideoComponent,
     VideoWatchComponent,
     VideoFavouritesComponent,
-    VideoEditComponent
+    VideoEditComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,10 @@
+<ng-template [ngIf]="user">
+    <div class="center pt-5">
+        <img width="255" height="230" class="rounded-circle rounded mx-auto d-block" [src]="user.imageUrl" />
+    </div>
+    <div class="text-center pt-3">
+        <h1><span class="badge badge-warning"><strong>{{user.firstName}} {{user.lastName}}</strong></span></h1>
+        <span class="border-top border-bottom">{{user.email}}</span>
+    </div>
+    
+</ng-template>

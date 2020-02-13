@@ -1,11 +1,13 @@
 <div class="jumbotron">
     <div class="page-header">
         <div class="pull-left">
-            <ng-template [ngIf]="!userFullName">
+            <ng-template [ngIf]="!isAuth">
                 <h2 class="display-3 text-muted">Welcome, Guest!</h2>
             </ng-template>
-            <ng-template [ngIf]="userFullName">
-                <h2 class="display-3 text-muted">Welcome, {{userFullName}}!</h2>
+            <ng-template [ngIf]="isAuth">
+                <ng-template [ngIf]="userFullName">
+                    <h2 class="display-3 text-muted">Welcome, {{userFullName}}!</h2>
+                </ng-template>
             </ng-template>
         </div>
         <div class="clearfix">

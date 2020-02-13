@@ -19,7 +19,7 @@
           <li class="nav-item">
             <i class="fas fa-plus-square fa-3x pointer" routerLink="video/create"></i>
             <i class="fas fa-heart fa-3x pointer" style="color:#FF0000;" routerLink="/video/favourites"></i>
-            <i class="fas fa-user fa-3x pointer" style="color:black;" routerLink=""></i>
+            <i class="fas fa-user fa-3x pointer" style="color:black;" (click)="profile()"></i>
             <i class="fas fa-sign-out-alt fa-3x pointer" (click)="logout()" routerLink=""></i>
           </li>
       </ul>
