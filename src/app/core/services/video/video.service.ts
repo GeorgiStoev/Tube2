@@ -6,6 +6,7 @@ import { ToastrConfig } from '../../../models/toatsr.config';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../auth/auth.service';
 import { map } from "rxjs/operators";
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,8 @@ export class VideoService {
     private afDb: AngularFirestore,
     private router: Router,
     private toastr: ToastrService,
-    private authService: AuthService
+    private authService: AuthService,
+    private sanitizer: DomSanitizer,
   ) { }
 
   listByCategory(category: string) {
@@ -73,5 +75,21 @@ export class VideoService {
     .catch((err) => {
       this.toastr.error(err, "Error", ToastrConfig);
     });
+  }
+
+  editVideo(video: any) {
+    let id = video.id;
+    return this.afDb.collection('videos').doc(id).update(video)
+      .then(() => {
+        this.toastr.success("Successfully edit video!", "Success", ToastrConfig);
+        this.router.navigate([ `/video/watch/${id}` ]);
+      })
+      .catch(err => {
+        this.toastr.error(err, "Error", ToastrConfig);
+      });;
+  }
+
+  transform(url: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url.replace('watch?v=', 'embed/'));
   }
 }

@@ -16,6 +16,7 @@ export class VideoWatchComponent implements OnInit {
   isMy: boolean;
   uploaderPicUrl: string;
   userNames: string;
+  id: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,8 +31,8 @@ export class VideoWatchComponent implements OnInit {
 
   getVideo() {
     this.route.params.subscribe((data) => {
-      let id = data['id'];
-      this.videoService.getVideoById(id)
+      this.id = data['id'];
+      this.videoService.getVideoById(this.id)
       .subscribe((video) => {
         this.video = video,
         this.videoUrl = this.transform(this.video.videoUrl);

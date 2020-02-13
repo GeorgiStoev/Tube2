@@ -6,11 +6,11 @@
       <div class="row justify-content-around">
         <div class="col-5 pt-1 m-1">
             <img width="75" height="75" class="rounded-circle rounded mx-auto d-block" [src]="uploaderPicUrl"/>
-            <small class="text-muted">{{userNames}}</small>
+            <span class="badge badge-danger">{{userNames}}</span>
         </div>
         <div class="col-5 pt-2">
             <ng-template [ngIf]="isMy">
-                <i class="fas fa-grip-horizontal fa-3x pointer" style="color: #33ddff;"></i>
+                <i class="fas fa-grip-horizontal fa-3x pointer" style="color: #33ddff;" [routerLink]="['/video/edit', id]"></i>
                 <i class="far fa-trash-alt fa-3x pointer" style="color:#FF0000;" (click)="delete()"></i>
             </ng-template>
         </div>

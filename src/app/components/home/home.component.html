@@ -2,10 +2,10 @@
     <div class="page-header">
         <div class="pull-left">
             <ng-template [ngIf]="!userFullName">
-                <h1 class="display-3">Welcome, Guest!</h1>
+                <h2 class="display-3 text-muted">Welcome, Guest!</h2>
             </ng-template>
             <ng-template [ngIf]="userFullName">
-                <h1 class="display-3">Welcome, {{userFullName}}!</h1>
+                <h2 class="display-3 text-muted">Welcome, {{userFullName}}!</h2>
             </ng-template>
         </div>
         <div class="clearfix">
