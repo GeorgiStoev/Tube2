@@ -34,13 +34,15 @@ export class VideoWatchComponent implements OnInit {
       this.id = data['id'];
       this.videoService.getVideoById(this.id)
       .subscribe((video) => {
-        this.video = video,
-        this.videoUrl = this.transform(this.video.videoUrl);
-        this.isMy = this.videoService.isMy(this.video.uploaderId);
-        this.authService.getUser(this.video.uploaderId).subscribe((data) => {
-        this.uploaderPicUrl = data[0].imageUrl;
-        this.userNames = data[0].firstName + " " + data[0].lastName;
-        })
+        this.video = video;
+        if(this.video){
+            this.videoUrl = this.transform(this.video.videoUrl);
+            this.isMy = this.videoService.isMy(this.video.uploaderId);
+            this.authService.getUser(this.video.uploaderId).subscribe((data) => {
+            this.uploaderPicUrl = data[0].imageUrl;
+            this.userNames = data[0].firstName + " " + data[0].lastName;
+          });
+        }
       });
     });
   }

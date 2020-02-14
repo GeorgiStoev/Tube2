@@ -38,6 +38,19 @@ export class VideoService {
     return this.afDb.collection<Video>('videos').doc(id).valueChanges();
   }
 
+  getVideosByUserId(id: string) {
+    const data =  this.afDb.collection<Video>('videos', ref => ref.where('uploaderId', '==', id));
+    return data.snapshotChanges().pipe(
+      map(actions => actions.map(
+        a => {
+          const data = a.payload.doc.data() as Video;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        }
+      ))
+    );
+  }
+
   createVideo(name: string, category: string, videoUrl: string, uploaderId: string, date: Date) {
     
     this.afDb.collection<Video>('videos').add({
