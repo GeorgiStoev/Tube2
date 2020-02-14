@@ -22,7 +22,7 @@ const routes: Routes = [
       { path: 'favourites', component: VideoFavouritesComponent },
       { path: 'edit/:id', component: VideoEditComponent },
      ], 
-    // canActivate: [AuthGuard],
+     canActivate: [AuthGuard],
   },
   { path: 'profile/:id', component: UserProfileComponent }
 ];

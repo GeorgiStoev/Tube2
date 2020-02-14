@@ -25,7 +25,9 @@ export class VideoFavouritesComponent implements OnInit {
   getFavourites(id: string) {
 
     this.authService.getUser(id).subscribe(data => {
-    this.getVideos(data[0].favourites);
+      if(data[0]){
+        this.getVideos(data[0].favourites);
+      }
     });
   }
 
