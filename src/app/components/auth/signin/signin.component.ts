@@ -17,6 +17,7 @@ export class SigninComponent implements OnInit {
   }
 
   signIn(formData) {
+    
     const email = formData.value.email;
     const password = formData.value.password;
     

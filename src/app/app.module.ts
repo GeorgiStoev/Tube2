@@ -14,6 +14,7 @@ import { SharedModule } from './modules/shared-module/shared.module';
 import { HomeComponent } from './components/home/home.component';
 import { VideoModule } from './modules/video-module/video.module';
 import { FirebaseModule } from './modules/firebase-module/firebase.module';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 @NgModule({
   declarations: [

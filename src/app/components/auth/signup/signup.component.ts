@@ -8,6 +8,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 })
 
 export class SignupComponent implements OnInit {
+
   constructor(
     private authService: AuthService
   ) { }
@@ -17,6 +18,7 @@ export class SignupComponent implements OnInit {
   }
 
   signUp(formData) {
+    
     const email = formData.value.email;
     const firstName = formData.value.firstName;
     const lastName = formData.value.lastName;
